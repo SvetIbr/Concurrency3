@@ -6,7 +6,8 @@ public class ComplexTaskExecutor {
     private final ComplexTask task;
 
     public ComplexTaskExecutor(int numberOfTasks) {
-        this.barrier = new CyclicBarrier(numberOfTasks);
+        Runnable barrierAction = () -> System.out.println("Well done, guys!");
+        this.barrier = new CyclicBarrier(numberOfTasks, barrierAction);
         this.executorService = Executors.newFixedThreadPool(numberOfTasks);
         this.task = new ComplexTask();
     }
